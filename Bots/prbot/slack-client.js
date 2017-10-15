@@ -1,16 +1,15 @@
 const axios = require('axios')
 
 module.exports = class SlackClient {
-  
   constructor(slackAPIToken) {
     this._axios = this._configureAxios(slackAPIToken)
   }
-
-  // return array of pr objects {slackUsername: 'josh', prLink: 'https://...'}
   unlabeledPrs() {
+    // return array of pr objects {slackUsername: 'josh', prLink: 'https://...'}
   }
-
-  // pseudo private instance methods
+  postMessage(message) {
+    // post message using this._axios.
+  }
   async _getChannels() {
     try {
       const response = await this._axios.get('channels.list')
@@ -19,8 +18,6 @@ module.exports = class SlackClient {
       console.log(e)
     }
   }
-
-  // pseudo private methods
   _configureAxios() {
     return axios.create({
       baseURL: 'https://slack.com/api/',

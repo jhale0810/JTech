@@ -8,27 +8,22 @@ const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN
 const SlackClient = require('./slack-client')
 
 class Bot {
-  
   constructor() {
     this.slackClient = new SlackClient(SLACK_BOT_TOKEN)
   }
-
   run() {
     this._scheduleCronJob(
-      this._postSlackMessageForUnlabeledPrs(SlackClient.unlabeledPrs()),
+      this._postSlackMessageForUnlabeledPrs(this.slackClient.unlabeledPrs()),
       {
         every: 'day',
         at: '11:00'
       }
     )
   }
-
-
-  // pseudo private instance methods
   _postSlackMessageForUnlabeledPrs(prs) {
-    SlackClient.post_message('Morning - here are the unlabeled PRs...')
+    this.slackClient.postMessage('Morning - here are the unlabeled PRs...')
     prs.forEach(pr => {
-      SlackClient.post_message(`@${pr.slackUsername}: ${pr.link}`)
+      this.slackClient.postMessage(`@${pr.slackUsername}: ${pr.link}`)
     })
   }
   _scheduleCronJob(job, options = {}) {
