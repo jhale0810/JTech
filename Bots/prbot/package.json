@@ -9,7 +9,8 @@
   "author": "Joshua Hale",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.16.2",
+    "dotenv": "^4.0.0"
   },
   "devDependencies": {}
 }
